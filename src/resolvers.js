@@ -3,8 +3,14 @@ const resolvers = {
     tasks: (_, __, { tasks }) => tasks,
   },
   Mutation: {
-    createTask: (_, { title, description }, { tasks, idCounter }) => {
-      const newTask = { id: idCounter++, title, description, completed: false };
+    createTask: (_, { title, description }, { tasks, updateCounter }) => {
+      const newTask = {
+        id: updateCounter(),
+        title,
+        description,
+        completed: false,
+      };
+
       tasks.push(newTask);
 
       return newTask;

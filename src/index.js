@@ -5,12 +5,13 @@ const resolvers = require("./resolvers.js");
 
 let tasks = [];
 let idCounter = 1;
+const updateCounter = () => idCounter++;
 
 const app = express();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: () => ({ tasks, idCounter }),
+  context: () => ({ tasks, updateCounter }),
 });
 
 server.start().then(() => {

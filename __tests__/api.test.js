@@ -7,13 +7,14 @@ const resolvers = require("../src/resolvers");
 let server, app;
 let tasks = [];
 let idCounter = 1;
+const updateCounter = () => idCounter++;
 
 beforeAll(() => {
   app = express();
   server = new ApolloServer({
     typeDefs,
     resolvers,
-    context: () => ({ tasks, idCounter }),
+    context: () => ({ tasks, updateCounter }),
   });
 
   server.start().then(() => {
